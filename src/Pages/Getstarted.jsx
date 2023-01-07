@@ -1,9 +1,36 @@
 import React from 'react'
 import getstarted from '../assets/getstarted.png'
 import IMG_2437 from '../assets/IMG_2437.png'
-import google from '../assets/google.png'
 import {AiOutlineArrowRight} from 'react-icons/ai'
 const Getstarted = () => {
+
+  let client = google.accounts.oauth2.initTokenClient({
+    client_id: '810913561449-r80nc33r20qe18ij2bcll7i6sv4r8bkg.apps.googleusercontent.com',
+    scope: 'https://www.googleapis.com/auth/calendar.readonly \
+              https://www.googleapis.com/auth/spreadsheets \
+              https://www.googleapis.com/auth/userinfo.profile \
+              https://www.googleapis.com/auth/drive',
+    ux_mode: 'popup',
+    callback: (response) => {
+      // run fetch request to get user info
+      let value = fetch('https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=' + response.access_token, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+        },
+      })
+        .then(value => value.json())
+        .then(text => console.log(text))
+    }
+  })
+
+  function getAuthCode() {
+    // Request authorization code and obtain user consent
+    // Return code to backend.
+    // let code = getAuthCode()
+    client.requestAccessToken()
+  }
+
   return (
     <main className='container'>
 
@@ -38,7 +65,7 @@ const Getstarted = () => {
             <article className='works'>
                 
                 
-                <p>See how Peppu works </p>
+                <p onClick={getAuthCode}>See how Peppu works </p>
 
                 <figure className='icon'>
                   <AiOutlineArrowRight />
