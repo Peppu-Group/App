@@ -6,7 +6,7 @@ const Sidebar = () => {
         {/*Home page Nave-bar components style={{width: 74, height: 30, marginTop: 13}} */}
       <section className='home-sidebar'>
         <article className='sidenav'>
-            <a href='/'><img src={IMG_2437} className='side-img'/></a>
+            <a href='https://peppubooks.com'><img src={IMG_2437} className='side-img'/></a>
            <a href='/dashboard'><li>Dashboard</li></a>
            <a href='/invoices'><li>Invoices</li></a>
            <a href='/notifications'><li>Notifications</li></a>
