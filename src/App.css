@@ -1,41 +1,54 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/*General style starts */
+
+*{
+  font-family: 'Poppins', sans-serif;
+  
+}
+p{
+  line-height: 2rem;
+  color: #202124;
+}
+.root{
+  font-size: 62.4%;
+ 
+}
+p{
+  font-weight: 500;
+}
+li {
+  list-style-type: none;
+}
+/* General Style ends Here*/
+
+/* The sidebar menu */
+.sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  background: #E8EAED;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);    
+  width: 10%; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding: 4%;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* The navigation menu links */
+.sidenav a {
+  padding-left: 40%;
+  padding-top: 25%;
+  text-decoration: none;
+  font-size: 25px;
+  color: black;
+  display: block;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #4285F4;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.side-img {
+  height: 40px;
 }
