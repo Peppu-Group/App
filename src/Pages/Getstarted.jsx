@@ -2,8 +2,11 @@ import React from 'react'
 import getstarted from '../assets/getstarted.png'
 import IMG_2437 from '../assets/IMG_2437.png'
 import {AiOutlineArrowRight} from 'react-icons/ai'
+import {useNavigate} from 'react-router-dom'
 const Getstarted = () => {
 
+
+  const navigate = useNavigate()
   let client = google.accounts.oauth2.initTokenClient({
     client_id: '810913561449-r80nc33r20qe18ij2bcll7i6sv4r8bkg.apps.googleusercontent.com',
     scope: 'https://www.googleapis.com/auth/calendar.readonly \
@@ -21,6 +24,7 @@ const Getstarted = () => {
       })
         .then(value => value.json())
         .then(text => console.log(text))
+        .then(navigate('/'))
     }
   })
 
