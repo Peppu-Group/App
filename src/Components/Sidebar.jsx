@@ -7,7 +7,7 @@ const Sidebar = () => {
       <section className='home-sidebar'>
         <article className='sidenav'>
             <a href='https://peppubooks.com'><img src={IMG_2437} className='side-img'/></a>
-           <a href='/dashboard'><li>Dashboard</li></a>
+           <a href='/'><li>Dashboard</li></a>
            <a href='/invoices'><li>Invoices</li></a>
            <a href='/notifications'><li>Notifications</li></a>
            <a href='/help'><li>Help</li></a>
