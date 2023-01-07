@@ -15,6 +15,9 @@ p{
 p{
   font-weight: 500;
 }
+li {
+  list-style-type: none;
+}
 /* General Style ends Here*/
 
 /* The sidebar menu */
@@ -33,7 +36,8 @@ p{
 
 /* The navigation menu links */
 .sidenav a {
-  padding-left: 50%;
+  padding-left: 40%;
+  padding-top: 25%;
   text-decoration: none;
   font-size: 25px;
   color: black;
@@ -46,5 +50,5 @@ p{
 }
 
 .side-img {
-  height: 30px;
+  height: 40px;
 }
