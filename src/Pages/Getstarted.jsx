@@ -23,7 +23,7 @@ const Getstarted = () => {
         },
       })
         .then(value => value.json())
-        .then(text => console.log(text))
+        .then(text => document.cookie = "userinfo=" + text)
         .then(navigate('/'))
     }
   })
