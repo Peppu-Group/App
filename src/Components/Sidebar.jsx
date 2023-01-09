@@ -1,10 +1,10 @@
 import React from 'react'
 import IMG_2437 from '../assets/IMG_2437.png'
-import {RiDashboardFill} from 'react-icons/ri'
+import {MdOutlineDashboard} from 'react-icons/md'
 import {IoMdNotificationsOutline} from 'react-icons/io'
 import {MdOutlineHelpCenter} from 'react-icons/md'
 import {FaFileInvoiceDollar} from 'react-icons/fa'
-import {GrUserSettings} from 'react-icons/gr'
+import {RiUserSettingsFill} from 'react-icons/ri'
 const Sidebar = () => {
     function readCookie(name) {
         var nameEQ = name + "=";
@@ -34,34 +34,32 @@ const Sidebar = () => {
                     <a href='/'><img className='user-image' src={url}/></a>
                     <a href='/'><li className='username'>{JSON.parse(readCookie('userinfo')).username}</li></a>
                  </section>  
+
+
                  <section className='icons'>
-                    <section className='dash-icon'>
-                       <RiDashboardFill />
-                    </section>
+                       <MdOutlineDashboard className='icon'/>
                     <a href='/'><li>Dashboard</li></a>
                  </section>  
+
+
                  <section className='icons'>
-                    <section className='invoice-icon'>
-                        <FaFileInvoiceDollar/>
-                    </section>
+                        <FaFileInvoiceDollar className='icon'/>
                     <a href='/invoices'><li>Invoices</li></a>
                  </section>
+
+                 
                  <section className='icons'>
-                    <section className='icon'>
-                        <IoMdNotificationsOutline/>
-                    </section>
+                        <IoMdNotificationsOutline className='icon'/>
                     <a href='/notifications'><li className='notification'>Notifications</li></a>
                  </section>
+
+
                  <section className='icons'>
-                    <section className='help-icon'>
-                       <MdOutlineHelpCenter />
-                    </section>
+                       <MdOutlineHelpCenter className='icon'/>
                     <a href='/help'><li>Help</li></a>
                  </section>
                  <section className='icons'>
-                    <section className='pref-icon'>
-                        <GrUserSettings />
-                    </section>  
+                        <RiUserSettingsFill className='icon'/>
                     <a href='/preferences'><li>Preferences</li></a>
                  </section>
                 </article>

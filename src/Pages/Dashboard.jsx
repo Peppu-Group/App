@@ -3,13 +3,13 @@ import Sidebar from '../Components/Sidebar'
 
 const Dashboard = () => {
   return (
-    <body className='dashboard-main'>
+    <main className='dashboard-main'>
     <header>
       <nav>
         <Sidebar />
       </nav>
     </header>
-    </body>
+    </main>
   )
 }
 

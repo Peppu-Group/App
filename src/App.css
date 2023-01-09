@@ -2,7 +2,6 @@
 
 *{
   font-family: 'Poppins', sans-serif;
-  
 }
 p{
   line-height: 2rem;
@@ -22,14 +21,14 @@ li {
 
 /* The sidebar menu */
 .sidenav {
-  height: 100%; /* Full-height: remove this if you want "auto" height */
+  height: 110vh; /* Full-height: remove this if you want "auto" height */
   background: #E8EAED;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);    
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  position: absolute; /* Fixed Sidebar (stay in place on scroll) */
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
   left: 0;
-  overflow-x: hidden; /* Disable horizontal scroll */
+   /* Disable horizontal scroll */
   padding: 4% 10% 4% 4%;
 }
 
@@ -42,58 +41,33 @@ li {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  left: 5px;
 }
 
 .username{
   padding-top: 5%;
 }
 
+
 .icon{
-  font-size: 30px;
-  color: black;
-  padding-top: 25%;
-  padding-left: 69%;
+  position: relative;
+  left: 5px;
+  font-size: 45px;
+  top: 80px;
+  bottom: 29px;
 }
+ 
+
 
 .icons{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-
-
-.pref-icon{
-  font-size: 30px;
-  color: black;
-  padding-top: 25%;
-  padding-left: 75%;
-}
-
-.invoice-icon{
-  font-size: 30px;
-  color: black;
-  padding-top: 25%;
-  padding-left: 38%;
-}
-
-.dash-icon{
-  font-size: 30px;
-  color: black;
-  padding-top: 25%;
-  padding-left: 60%;
-}
-
-.help-icon{
-  font-size: 30px;
-  color: black;
-  padding-top: 25%;
-  padding-left: 20%;
+  color:black;
 }
 
 .icons:hover{
-  color: #4285F4;
+  color:#4285F4;
 }
+
+
 /* The navigation menu links */
 .sidenav a {
   padding-left: 40%;
