@@ -25,6 +25,7 @@ const Getstarted = () => {
         .then(value => value.json())
         .then(text => document.cookie = "userinfo=" + JSON.stringify({ username: text.name, userimg: text.picture }))
         .then(navigate('/'))
+        .then(window.location.reload())
     }
   })
 
@@ -78,7 +79,7 @@ const Getstarted = () => {
 
             </article>
 
-
+           
             
         </section>
     </main>
