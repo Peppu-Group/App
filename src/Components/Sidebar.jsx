@@ -11,6 +11,14 @@ const Sidebar = () => {
         }
         return null;
     }
+    let url = JSON.parse(readCookie('userinfo')).userimg
+    let user_img = fetch(url)
+        .then(res => { return res.blob() })
+        .then(blob => {
+            var img = URL.createObjectURL(blob);
+            return img
+        })
+
     return (
         <main>
             {/*Home page Nave-bar components style={{width: 74, height: 30, marginTop: 13}} */}
@@ -18,7 +26,7 @@ const Sidebar = () => {
                 <article className='sidenav'>
                     <a href='https://peppubooks.com'><img src={IMG_2437} className='side-img' /></a>
                     <a href='/'><li>{JSON.parse(readCookie('userinfo')).username}</li></a>
-                    <a href='/'><li>{JSON.parse(readCookie('userinfo')).userimg}</li></a>
+                    <a href='/'><img src={user_img}/></a>
                     <a href='/'><li>Dashboard</li></a>
                     <a href='/invoices'><li>Invoices</li></a>
                     <a href='/notifications'><li>Notifications</li></a>
