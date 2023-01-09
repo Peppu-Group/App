@@ -12,11 +12,11 @@ const Sidebar = () => {
         return null;
     }
     let url = JSON.parse(readCookie('userinfo')).userimg
-    let user_img = fetch(url)
+    let user_img = await fetch(url)
         .then(res => { return res.blob() })
         .then(blob => {
             var img = URL.createObjectURL(blob);
-            return img.valueOf()
+            return img
         })
 
     return (
