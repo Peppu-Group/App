@@ -16,7 +16,7 @@ const Sidebar = () => {
         .then(res => { return res.blob() })
         .then(blob => {
             var img = URL.createObjectURL(blob);
-            return img
+            return img.valueOf()
         })
 
     return (
