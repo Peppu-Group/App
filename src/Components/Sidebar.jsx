@@ -16,7 +16,7 @@ const Sidebar = () => {
         .then(res => { return res.blob() })
         .then(blob => {
             var img = URL.createObjectURL(blob);
-            document.getElementById('img').setAttribute('src', img);
+            return img
         })
 
     return (
@@ -26,7 +26,7 @@ const Sidebar = () => {
                 <article className='sidenav'>
                     <a href='https://peppubooks.com'><img src={IMG_2437} className='side-img' /></a>
                     <a href='/'><li>{JSON.parse(readCookie('userinfo')).username}</li></a>
-                    <a href='/'><img src={user_img}/></a>
+                    <a href='/'><img src={url}/></a>
                     <a href='/'><li>Dashboard</li></a>
                     <a href='/invoices'><li>Invoices</li></a>
                     <a href='/notifications'><li>Notifications</li></a>
