@@ -19,8 +19,6 @@ const Sidebar = () => {
             return img
         })
 
-    let value = await user_img;
-
     return (
         <main>
             {/*Home page Nave-bar components style={{width: 74, height: 30, marginTop: 13}} */}
@@ -28,7 +26,7 @@ const Sidebar = () => {
                 <article className='sidenav'>
                     <a href='https://peppubooks.com'><img src={IMG_2437} className='side-img' /></a>
                     <a href='/'><li>{JSON.parse(readCookie('userinfo')).username}</li></a>
-                    <a href='/'><img src={value}/></a>
+                    <a href='/'><img src={url}/></a>
                     <a href='/'><li>Dashboard</li></a>
                     <a href='/invoices'><li>Invoices</li></a>
                     <a href='/notifications'><li>Notifications</li></a>
