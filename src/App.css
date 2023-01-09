@@ -42,9 +42,58 @@ li {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding-left: 40%;
 }
 
+.username{
+  padding-top: 5%;
+}
+
+.icon{
+  font-size: 30px;
+  color: black;
+  padding-top: 25%;
+  padding-left: 69%;
+}
+
+.icons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+
+
+.pref-icon{
+  font-size: 30px;
+  color: black;
+  padding-top: 25%;
+  padding-left: 75%;
+}
+
+.invoice-icon{
+  font-size: 30px;
+  color: black;
+  padding-top: 25%;
+  padding-left: 38%;
+}
+
+.dash-icon{
+  font-size: 30px;
+  color: black;
+  padding-top: 25%;
+  padding-left: 60%;
+}
+
+.help-icon{
+  font-size: 30px;
+  color: black;
+  padding-top: 25%;
+  padding-left: 20%;
+}
+
+.icons:hover{
+  color: #4285F4;
+}
 /* The navigation menu links */
 .sidenav a {
   padding-left: 40%;
