@@ -25,8 +25,10 @@ const Sidebar = () => {
             <section className='home-sidebar'>
                 <article className='sidenav'>
                     <a href='https://peppubooks.com'><img src={IMG_2437} className='side-img' /></a>
-                    <a href='/'><li>{JSON.parse(readCookie('userinfo')).username}</li></a>
-                    <a href='/'><img src={url}/></a>
+                 <section className='user-info'>
+                    <a href='/'><img className='user-image' src={url}/></a>
+                    <a href='/'><li className='username'>{JSON.parse(readCookie('userinfo')).username}</li></a>
+                 </section>    
                     <a href='/'><li>Dashboard</li></a>
                     <a href='/invoices'><li>Invoices</li></a>
                     <a href='/notifications'><li>Notifications</li></a>

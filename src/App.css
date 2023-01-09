@@ -30,7 +30,18 @@ li {
   top: 0; /* Stay at the top */
   left: 0;
   overflow-x: hidden; /* Disable horizontal scroll */
-  padding: 4%;
+  padding: 4% 10% 4% 4%;
+}
+
+.user-image{
+  border-radius: 50%;
+}
+
+
+.user-info{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 /* The navigation menu links */
