@@ -8,9 +8,9 @@ p{
   color: #202124;
 }
 .root{
-  font-size: 62.4%;
- 
+  font-size: 62.4%; 
 }
+
 p{
   font-weight: 500;
 }
@@ -20,16 +20,14 @@ li {
 /* General Style ends Here*/
 
 /* The sidebar menu */
+
 .sidenav {
-  height: 200%; /* Full-height: remove this if you want "auto" height */
-  background: #E8EAED;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);    
-  position: absolute; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
+    
+   /*position: absolute; 
+  z-index: 1; 
+  top: 0; 
   left: 0;
-   /* Disable horizontal scroll */
-  padding: 4% 10% 4% 4%;
+  padding: 4% 10% 4% 4%;*/
 }
 
 .user-image{
@@ -40,34 +38,51 @@ li {
 .user-info{
  display: flex;
  align-items: center;
+ margin-top: 15%;
+ margin-bottom: 5%;
 }
 
 .username{
- margin-left: -50px;
- align-items: center;
+  font-weight: 200;
+/* margin-left: -50px;
+ align-items: center;*/
 }
-
+/*
 .user-image{
   margin-left: -20px;
 }
 
-.icon{
+/*.icon{
   position: relative;
   left: 45px;
   font-size: 25px;
   top: 80px;
   bottom: 29px;
   
+}*/
+.icon{
+  font-size: 3em;
+  margin-right: 10%;
 }
  
-.text{
+/*.text{
   margin-left: 15px;
   margin-top: 5px;
+}*/
+.text{
+  margin-top: 10%;
 }
-
+.text.last{
+  margin-left: 8%;
+}
+.text.help{
+  margin-top: 15%;
+}
 .icons{
-  align-items: center;
+ 
   color:black;
+  display: flex;
+  margin-top: 15%;
 }
 
 .icons:hover{
@@ -77,8 +92,7 @@ li {
 
 /* The navigation menu links */
 .sidenav a {
-  padding-left: 40%;
-  padding-top: 25%;
+
   text-decoration: none;
   font-size: 25px;
   color: black;
@@ -91,9 +105,60 @@ li {
 }
 
 .side-img {
-  height: 40px;
+  width: 60%;
+  margin-top: 10%;
+}
+/**DashBoard style starts here**/
+#dash-board{
+  display: block;
+}
+.dashboard-main{
+  margin-top: 0;
+  display:flex;
+  justify-content: space-between;
+  width: 100%;
+  
+ 
+}
+.dashboard-main aside{
+  height: 100vh; 
+  background: #E8EAED;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25); 
+  width: 25%;
+  padding-left: 5%;
+
+ 
+ 
+}
+.dashboard-main main{
+  margin-left: 2%;
+}
+.dashboard-main header{
+  position: relative;
+  top:0%;
+}
+.dashboard-main .fixed{
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+  height: 10%;
 }
 
+.search{
+  
+  height: 4%;
+  margin-top: 1.5%;
+  margin-right: 4%;
+  background-color: aliceblue;
+  border-radius: 50%;
+  padding:1% 1% 2% 1%;
+  font-size: 1.2rem;
+  font-weight: 50;
+}
+
+/**DashBoard Style ends Here**/
 /* Get started Page style starts here*/
 .container{
   margin-block: -1%;
