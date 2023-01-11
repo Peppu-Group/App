@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import IMG_2437 from '../assets/IMG_2437.png'
 import {MdOutlineDashboard} from 'react-icons/md'
 import {IoMdNotificationsOutline} from 'react-icons/io'
 import {MdOutlineHelpCenter} from 'react-icons/md'
 import {FaFileInvoiceDollar} from 'react-icons/fa'
 import {RiUserSettingsFill} from 'react-icons/ri'
+import axios from 'axios'
 const Sidebar = () => {
     function readCookie(name) {
         var nameEQ = name + "=";
@@ -16,13 +17,19 @@ const Sidebar = () => {
         }
         return null;
     }
+
+    const [UserImage, setUserImage] = useState()
     let url = JSON.parse(readCookie('userinfo')).userimg
-    let user_img = fetch(url)
-        .then(res => { return res.blob() })
-        .then(blob => {
-            var img = URL.createObjectURL(blob);
-            return img
-        })
+    
+   useEffect(() => {
+     axios.get(url).then((response)=>{
+        setUserImage(response.data)
+     })
+   }, [UserImage])
+   
+      
+   
+    
 
     return (
         <main>
