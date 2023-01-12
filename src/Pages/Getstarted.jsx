@@ -24,7 +24,9 @@ const Getstarted = () => {
       })
         .then(value => value.json())
         .then(text => document.cookie = "userinfo=" + JSON.stringify({ username: text.name, userimg: text.picture }))
+        // Add spinner here
         .then(createFolder())
+        .then(navigate('/'))
     }
   })
 
