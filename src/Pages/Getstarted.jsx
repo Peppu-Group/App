@@ -7,6 +7,7 @@ const Getstarted = () => {
 
 
   const navigate = useNavigate()
+  gapi.load('client', gapiStart)
   let client = google.accounts.oauth2.initTokenClient({
     client_id: '810913561449-r80nc33r20qe18ij2bcll7i6sv4r8bkg.apps.googleusercontent.com',
     scope: 'https://www.googleapis.com/auth/calendar.readonly \
@@ -29,6 +30,19 @@ const Getstarted = () => {
         .then(navigate('/'))
     }
   })
+
+    // Function to load the gapi client.
+    // Gapi is the Google API client library, to load libraries and make requests.
+    function gapiStart() {
+      gapi.client.init({
+      }).then(function () {
+        gapi.client.load('drive', 'v3');
+      }).then(function (response) {
+        console.log('discovery document loaded');
+      }, function (reason) {
+        console.log('Error: ' + reason.result.error.message);
+      });
+    }
 
   function getAuthCode() {
     // Request authorization code and obtain user consent
