@@ -23,9 +23,9 @@ const Getstarted = () => {
         },
       })
         .then(value => value.json())
+        .then(createFolder())
         .then(text => navigate('/', { state:{username:text.name, userimg:text.picture}}))
         // Add spinner here
-        // .then(createFolder())
     }
   })
 
@@ -112,7 +112,6 @@ const Getstarted = () => {
         <figure>
           <img src={IMG_2437} />
         </figure>
-        <button onClick={handleCookie}>Set Cookie</button>
         <article className='container-paragraph'>
           <p>Let's make your <br /> life simple with our <br /> seamless book keeping</p>
         </article>

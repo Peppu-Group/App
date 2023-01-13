@@ -1,13 +1,9 @@
 import React from 'react'
 import Sidebar from '../Components/Sidebar'
 import { FaSearch } from 'react-icons/fa'
-import { useCookies } from "react-cookie";
-import { useLocation } from 'react-router-dom';
-
 
 const Dashboard = () => {
-const location = useLocation();
-console.log(location)
+
   gapi.load('client', gapiStart)
    // Function to load the gapi client.
     // Gapi is the Google API client library, to load libraries and make requests.
