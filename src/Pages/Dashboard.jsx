@@ -1,8 +1,13 @@
 import React from 'react'
 import Sidebar from '../Components/Sidebar'
 import { FaSearch } from 'react-icons/fa'
+import { useCookies } from "react-cookie";
+import { useLocation } from 'react-router-dom';
+
 
 const Dashboard = () => {
+const location = useLocation();
+console.log(location)
   gapi.load('client', gapiStart)
    // Function to load the gapi client.
     // Gapi is the Google API client library, to load libraries and make requests.
@@ -21,6 +26,7 @@ const Dashboard = () => {
     // This means we should store parentinfo id as cookie.
     async function getFiles() {
       let response;
+      // retrieve Id from session
       let folderId = '1s3EMD559qpCT8v-TgIiCdQiD7jxVio-5'
       try {
         response = await gapi.client.drive.files.list({
@@ -50,7 +56,10 @@ const Dashboard = () => {
       <nav className='search'><FaSearch/></nav>
       </header>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut iste in ex dolor, soluta eos modi! Temporibus enim velit officiis! Quam autem odit quas harum vero fugiat tempora explicabo necessitatibus?</p>
+      {/*
+      // Filter this to print name alone.
       <p>{getFiles()} </p>
+    */}
     </main>
     
     </main>
