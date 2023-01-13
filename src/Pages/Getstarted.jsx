@@ -3,8 +3,7 @@ import getstarted from '../assets/getstarted.png'
 import IMG_2437 from '../assets/IMG_2437.png'
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
-import { useCookies } from "react-cookie";
-import {Link} from 'react-router-dom';
+
 const Getstarted = () => {
   const navigate = useNavigate()
   gapi.load('client', gapiStart)
@@ -29,18 +28,6 @@ const Getstarted = () => {
         // .then(createFolder())
     }
   })
-
-  function infos(text) {
-    let info = {username:text.name, userimg:text.picture}
-    return info
-  }
-
-  const [cookies, setCookie] = useCookies(["userinfo"]);
-  function handleCookie(text) {
-    setCookie("userinfo", {username:"text.name", userimg:"text.picture"}, {
-      path: "/"
-    });
-  }
 
   // Function to load the gapi client.
   // Gapi is the Google API client library, to load libraries and make requests.

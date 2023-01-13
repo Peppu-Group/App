@@ -6,30 +6,18 @@ import {MdOutlineHelpCenter} from 'react-icons/md'
 import {FaFileInvoiceDollar} from 'react-icons/fa'
 import {RiUserSettingsFill} from 'react-icons/ri'
 import axios from 'axios'
+import { useLocation } from 'react-router-dom';
 const Sidebar = () => {
-    function readCookie(name) {
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-        }
-        return null;
-    }
+    const location = useLocation();
 
     const [UserImage, setUserImage] = useState()
-    let url = JSON.parse(readCookie('userinfo')).userimg
+    let url = location.state.userimg;
     
    useEffect(() => {
      axios.get(url).then((response)=>{
         setUserImage(response.data)
      })
    }, [UserImage])
-   
-      
-   
-    
 
     return (
         <main>
@@ -39,7 +27,7 @@ const Sidebar = () => {
                     <a href='https://peppubooks.com'><img src={IMG_2437} className='side-img' /></a>
                  <section className='user-info'>
                     <a href='/'><img className='user-image' src={url}/></a>
-                    <a href='/'><li className='username'>{JSON.parse(readCookie('userinfo')).username}</li></a>
+                    <a href='/'><li className='username'>{location.state.username}</li></a>
                  </section>  
 
 
