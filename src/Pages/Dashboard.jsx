@@ -23,19 +23,26 @@ const Dashboard = () => {
     async function getFiles() {
       let response;
       // retrieve Id from session
-      let folderId = '1s3EMD559qpCT8v-TgIiCdQiD7jxVio-5'
+      let folderId = '1AOvAPTdkRjYdYwOGJVxRI4sRxFTUhurp'
       try {
         response = await gapi.client.drive.files.list({
           'fields': 'files(name)',
           'q': `'${folderId}' in parents`
         });
         // Add a guard to filter out Template Store
-        console.log(response);
+        return response.result.files;
       } catch (err) {
         console.log(err);
         return;
       }
     }
+    // name a constant and retrieve it in the body
+    getFiles().then(function(result) {
+      console.log(result); // This successfully returns template.
+      // Embed for loop here, to return all files.
+
+    });
+
 
   return (
     <body id='dash-board'>
