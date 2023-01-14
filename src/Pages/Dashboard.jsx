@@ -38,9 +38,8 @@ const Dashboard = () => {
     }
     // name a constant and retrieve it in the body
     getFiles().then(function(result) {
-      console.log(result); // This successfully returns template.
+      result.forEach(element => {return element.name}) // This successfully returns template.
       // Embed for loop here, to return all files.
-
     });
 
 
