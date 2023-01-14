@@ -1,72 +1,92 @@
-import React from 'react'
-import Sidebar from '../Components/Sidebar'
-import { FaSearch } from 'react-icons/fa'
+import Sidebar from '../Components/Sidebar';
+import { FaSearch } from 'react-icons/fa';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Dashboard = () => {
+  const [files, setFiles] = useState([]);
+  const location = useLocation();
 
-  gapi.load('client', gapiStart)
-   // Function to load the gapi client.
-    // Gapi is the Google API client library, to load libraries and make requests.
-    function gapiStart() {
-      gapi.client.init({
-      }).then(function () {
+  gapi.load('client', gapiStart);
+
+  // Function to load the gapi client.
+  // Gapi is the Google API client library, to load libraries and make requests.
+  function gapiStart() {
+    gapi.client
+      .init({})
+      .then(function () {
         gapi.client.load('drive', 'v3');
-      }).then(function (response) {
-        console.log('discovery document loaded');
-      }, function (reason) {
-        console.log('Error: ' + reason.result.error.message);
+      })
+      .then(
+        function (response) {
+          console.log('discovery document loaded');
+        },
+        function (reason) {
+          console.log('Error: ' + reason.result.error.message);
+        }
+      );
+  }
+
+  // This function should list files in the peppubooks folder.
+  // This means we should store parentinfo id as cookie.
+
+  async function getFiles() {
+    let response;
+    // retrieve Id from session
+    let folderId = '1AOvAPTdkRjYdYwOGJVxRI4sRxFTUhurp';
+    try {
+      response = await gapi.client.drive.files.list({
+        fields: 'files(name)',
+        q: `'${folderId}' in parents`,
       });
-    }
+      return response.result.files;
 
-    // This function should list files in the peppubooks folder.
-    // This means we should store parentinfo id as cookie.
-    async function getFiles() {
-      let response;
-      // retrieve Id from session
-      let folderId = '1AOvAPTdkRjYdYwOGJVxRI4sRxFTUhurp'
-      try {
-        response = await gapi.client.drive.files.list({
-          'fields': 'files(name)',
-          'q': `'${folderId}' in parents`
-        });
-        // Add a guard to filter out Template Store
-        return response.result.files;
-      } catch (err) {
-        console.log(err);
-        return;
-      }
+      // Add a guard to filter out Template Store
+    } catch (err) {
+      console.log(err);
+      return;
     }
-    // name a constant and retrieve it in the body
-    getFiles().then(function(result) {
-      result.forEach(element => {return element.name}) // This successfully returns template.
-      // Embed for loop here, to return all files.
-    });
+  }
 
+  useEffect(() => {
+    const fetchFiles = async () => {
+      const files = await getFiles();
+      setFiles(files);
+    };
+
+    fetchFiles();
+  }, [gapi]);
+
+  const displayFiles =
+    files && files.length > 0
+      ? files.map((file) => <div>File Name: {file.name}</div>)
+      : 'No files found.';
 
   return (
-    <body id='dash-board'>
-      
-    
-    <main className='dashboard-main'>
-      <aside>
-        <Sidebar />
-      </aside>
+    <body id="dash-board">
+      <main className="dashboard-main">
+        <aside>
+          <Sidebar />
+        </aside>
 
-    <main>
-      <header className='fixed'> 
-      <h2>My&nbsp;Workspace</h2>
-      <nav className='search'><FaSearch/></nav>
-      </header>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut iste in ex dolor, soluta eos modi! Temporibus enim velit officiis! Quam autem odit quas harum vero fugiat tempora explicabo necessitatibus?</p>
-      {/*
-      // Filter this to print name alone.
-      <p>{getFiles()} </p>
-    */}
-    </main>
-    
-    </main>
+        <main>
+          <header className="fixed">
+            <h2>My&nbsp;Workspace</h2>
+            <nav className="search">
+              <FaSearch />
+            </nav>
+          </header>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut iste in
+            ex dolor, soluta eos modi! Temporibus enim velit officiis! Quam
+            autem odit quas harum vero fugiat tempora explicabo necessitatibus?
+          </p>
+
+          <p>{displayFiles} </p>
+        </main>
+      </main>
     </body>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
