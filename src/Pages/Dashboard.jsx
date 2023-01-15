@@ -5,9 +5,8 @@ import { useCookies } from "react-cookie";
 
 const Dashboard = () => {
   const [files, setFiles] = useState([]);
-  
   const [cookies, setCookie] = useCookies(["file"]);
-  console.log(cookies.file)
+
   gapi.load('client', gapiStart);
 
   // Function to load the gapi client.
@@ -34,7 +33,7 @@ const Dashboard = () => {
   async function getFiles() {
     let response;
     // retrieve Id from session
-    let folderId = '1AOvAPTdkRjYdYwOGJVxRI4sRxFTUhurp';
+    let folderId = cookies.file.folderId;
     try {
       response = await gapi.client.drive.files.list({
         fields: 'files(name)',
@@ -60,7 +59,9 @@ const Dashboard = () => {
 
   const displayFiles =
     files && files.length > 0
-      ? files.map((file) => <div>File Name: {file.name}</div>)
+      ? files.filter(function (file) {
+        return file.name !== "Template Store";
+      }).map((file) => <div>File Name: {file.name}</div>)
       : 'No files found.';
        
   return (
