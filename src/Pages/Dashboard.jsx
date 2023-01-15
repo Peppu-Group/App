@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 const Dashboard = () => {
   const [files, setFiles] = useState([]);
   const location = useLocation();
-
+  console.log(location.state)
   gapi.load('client', gapiStart);
 
   // Function to load the gapi client.
@@ -33,7 +33,7 @@ const Dashboard = () => {
   async function getFiles() {
     let response;
     // retrieve Id from session
-    let folderId = '1AOvAPTdkRjYdYwOGJVxRI4sRxFTUhurp';
+    let folderId = location.state.folderId;
     try {
       response = await gapi.client.drive.files.list({
         fields: 'files(name)',
@@ -61,7 +61,7 @@ const Dashboard = () => {
     files && files.length > 0
       ? files.map((file) => <div>File Name: {file.name}</div>)
       : 'No files found.';
-
+       
   return (
     <body id="dash-board">
       <main className="dashboard-main">

@@ -53,9 +53,9 @@ const Getstarted = () => {
   // This function also creates a Template Store in the peppubooks folder.
   async function createFolder() {
     // Declare file, folder, folderId,fileId
+    let folderId;
     let file;
     let folder;
-    let folderId;
     let fileId;
     // Folder Metadata
     var folderMetadata = {
@@ -74,6 +74,7 @@ const Getstarted = () => {
       return;
     }
 
+
     // File Metadata
     var fileMetadata = {
       'name': 'Template Store',
@@ -88,6 +89,7 @@ const Getstarted = () => {
         fields: 'id',
       });
       fileId = file.result.id;
+      navigate('/', { state:{fileId:fileId, folderId:folderId}})
     } catch (err) {
       console.log(err);
       return;
