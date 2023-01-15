@@ -1,12 +1,13 @@
 import Sidebar from '../Components/Sidebar';
 import { FaSearch } from 'react-icons/fa';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useCookies } from "react-cookie";
 
 const Dashboard = () => {
   const [files, setFiles] = useState([]);
-  const location = useLocation();
-  console.log(location.state)
+  
+  const [cookies, setCookie] = useCookies(["file"]);
+  console.log(cookies.file)
   gapi.load('client', gapiStart);
 
   // Function to load the gapi client.
@@ -33,7 +34,7 @@ const Dashboard = () => {
   async function getFiles() {
     let response;
     // retrieve Id from session
-    let folderId = location.state.folderId;
+    let folderId = '1AOvAPTdkRjYdYwOGJVxRI4sRxFTUhurp';
     try {
       response = await gapi.client.drive.files.list({
         fields: 'files(name)',

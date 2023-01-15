@@ -3,6 +3,7 @@ import getstarted from '../assets/getstarted.png'
 import IMG_2437 from '../assets/IMG_2437.png'
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
+import { useCookies } from "react-cookie";
 
 const Getstarted = () => {
   const navigate = useNavigate()
@@ -49,13 +50,15 @@ const Getstarted = () => {
     client.requestAccessToken()
   }
 
+  const [cookies, setCookie] = useCookies(["file"]);
+
   // Function to create peppubooks folder in the user's drive.
   // This function also creates a Template Store in the peppubooks folder.
   async function createFolder() {
     // Declare file, folder, folderId,fileId
-    let folderId;
     let file;
     let folder;
+    let folderId;
     let fileId;
     // Folder Metadata
     var folderMetadata = {
@@ -89,7 +92,9 @@ const Getstarted = () => {
         fields: 'id',
       });
       fileId = file.result.id;
-      navigate('/', { state:{fileId:fileId, folderId:folderId}})
+      setCookie("file", {fileId: fileId, folderId: folderId}, {
+        path: "/"
+      });
     } catch (err) {
       console.log(err);
       return;
