@@ -110,7 +110,6 @@ const Dashboard = () => {
     }
 
     // FileResource
-    var resource = { spreadsheetId: cookies.file.fileId, range: "A:B", valueInputOption: 'RAW', insertDataOption: 'INSERT_ROWS', values: [{ name: fileId }] };
     try {
       // copy fileId into template store
       let update = await gapi.client.sheets.spreadsheets.values.append({
@@ -123,7 +122,8 @@ const Dashboard = () => {
             "majorDimension": "ROWS",
             "values": [
                 [
-                   fileId
+                  name,
+                  fileId
                 ]
             ],
         }
