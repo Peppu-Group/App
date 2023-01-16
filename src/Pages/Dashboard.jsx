@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useCookies } from "react-cookie";
 import {FcFolder} from 'react-icons/fc';
 import {FcOpenedFolder} from 'react-icons/fc';
+import {MdCreateNewFolder} from 'react-icons/md';
 
 const Dashboard = () => {
   const [files, setFiles] = useState([]);
@@ -68,7 +69,7 @@ const Dashboard = () => {
       if (filteredFiles.length == 0) {
         return (
           <div>
-            <FcOpenedFolder className='iicon'/> Template store found.
+            <FcOpenedFolder className='iicons'/> No folder, create one below.
           </div>
         );
       }
@@ -80,13 +81,17 @@ const Dashboard = () => {
     } else {
       return (
         <div>
-          <FcOpenedFolder className='iicons'/> No files found.
+           An error occured.
         </div>
       );
     }
   };
 
   const displayFiles = renderFiles(files);
+
+  function createWorkflow(){
+    <div>Blahh</div>
+  }
        
   return (
     <body id="dash-board">
@@ -110,6 +115,10 @@ const Dashboard = () => {
           <div>
           <p className='ficon'>Folders</p>
           <p>{displayFiles} </p>
+          </div>
+          <div>
+          <p className='ficon'>Workflows</p>
+          <p> <MdCreateNewFolder className='iicons'/>{createWorkflow}</p>
           </div>
         </main>
       </main>
