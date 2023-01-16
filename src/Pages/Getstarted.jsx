@@ -36,6 +36,8 @@ const Getstarted = () => {
     gapi.client.init({
     }).then(function () {
       gapi.client.load('drive', 'v3');
+    }).then(function () {
+      gapi.client.load('sheets', 'v4');
     }).then(function (response) {
       console.log('discovery document loaded');
     }, function (reason) {

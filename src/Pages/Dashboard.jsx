@@ -2,9 +2,9 @@ import Sidebar from '../Components/Sidebar';
 import { FaSearch } from 'react-icons/fa';
 import React, { useEffect, useState } from 'react';
 import { useCookies } from "react-cookie";
-import {FcFolder} from 'react-icons/fc';
-import {FcOpenedFolder} from 'react-icons/fc';
-import {MdCreateNewFolder} from 'react-icons/md';
+import { FcFolder } from 'react-icons/fc';
+import { FcOpenedFolder } from 'react-icons/fc';
+import { MdCreateNewFolder } from 'react-icons/md';
 
 const Dashboard = () => {
   const [files, setFiles] = useState([]);
@@ -69,19 +69,19 @@ const Dashboard = () => {
       if (filteredFiles.length == 0) {
         return (
           <div>
-            <FcOpenedFolder className='iicons'/> No folder, create one below.
+            <FcOpenedFolder className='iicons' /> No folder, create one below.
           </div>
         );
       }
       return filteredFiles.map((file) => (
         <div>
-          <FcFolder className='iicons'/> File Name: {file.name}
+          <FcFolder className='iicons' /> File Name: {file.name}
         </div>
       ));
     } else {
       return (
         <div>
-           An error occured.
+          An error occured.
         </div>
       );
     }
@@ -94,7 +94,7 @@ const Dashboard = () => {
     let fileId;
 
     // Filebody
-    var body = {name: name, parents: [cookies.file.folderId]};
+    var body = { name: name, parents: [cookies.file.folderId] };
 
     // Method to create file inside peppubooks folder
     try {
@@ -104,6 +104,30 @@ const Dashboard = () => {
       });
       fileId = file.result.id;
       // Write fileId into template store
+    } catch (err) {
+      console.log(err);
+      return;
+    }
+
+    // FileResource
+    var resource = { spreadsheetId: cookies.file.fileId, range: "A:B", valueInputOption: 'RAW', insertDataOption: 'INSERT_ROWS', values: [{ name: fileId }] };
+    try {
+      // copy fileId into template store
+      let update = await gapi.client.sheets.spreadsheets.values.append({
+        spreadsheetId: cookies.file.fileId,
+        range: 'A:B',
+        valueInputOption: 'RAW',
+        insertDataOption: 'INSERT_ROWS',
+        'resource': {
+          "range": "A:B",
+            "majorDimension": "ROWS",
+            "values": [
+                [
+                   fileId
+                ]
+            ],
+        }
+      })
     } catch (err) {
       console.log(err);
       return;
