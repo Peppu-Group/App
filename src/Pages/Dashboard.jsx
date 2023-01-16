@@ -89,21 +89,21 @@ const Dashboard = ({filename}) => {
 
   const displayFiles = renderFiles(files);
 
-  async function createWorkflow(name){
+  async function createWorkflow(name) {
     let file;
     let fileId;
     // File Metadata
     var fileMetadata = {
-      'name': name,
-      'mimeType': 'application/vnd.google-apps.spreadsheet',
-      'parents': [cookies.file.folderId],
+      name: name,
+      mimeType: "application/vnd.google-apps.spreadsheet",
+      parents: [cookies.file.folderId],
     };
 
     // Method to create file inside peppubooks folder
     try {
       file = await gapi.client.drive.files.create({
         resource: fileMetadata,
-        fields: 'id',
+        fields: "id",
       });
       fileId = file.result.id;
       // Write fileId into template store
@@ -112,7 +112,15 @@ const Dashboard = ({filename}) => {
       return;
     }
   }
-       
+
+  const promptToGetFileName = () => {
+    if (window.prompt) {
+      const filename = window.prompt("Enter File Name");
+
+      createWorkflow(filename);
+    }
+  };
+
   return (
     <body id="dash-board">
       <main className="dashboard-main">
@@ -133,17 +141,19 @@ const Dashboard = ({filename}) => {
             autem odit quas harum vero fugiat tempora explicabo necessitatibus?
           </p>
           <div>
-          <p className='ficon'>Folders</p>
-          <p>{displayFiles} </p>
+            <p className="ficon">Folders</p>
+            <p>{displayFiles} </p>
           </div>
           <div>
-          <p className='ficon'>Workflows</p>
-          <p onClick={() => createWorkflow(filename)}> <MdCreateNewFolder className='iicons'/></p>
+            <p className="ficon">Workflows</p>
+            <p onClick={promptToGetFileName}>
+              {" "}
+              <MdCreateNewFolder className="iicons" />
+            </p>
           </div>
         </main>
       </main>
     </body>
   );
 };
-
 export default Dashboard;
