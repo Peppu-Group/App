@@ -89,8 +89,29 @@ const Dashboard = () => {
 
   const displayFiles = renderFiles(files);
 
-  function createWorkflow(){
-    <div>Blahh</div>
+  // We will take the user's file name here.
+  async function createWorkflow(name){
+    let file;
+    let fileId;
+    // File Metadata
+    var fileMetadata = {
+      'name': name,
+      'mimeType': 'application/vnd.google-apps.spreadsheet',
+      'parents': [cookies.file.folderId],
+    };
+
+    // Method to create file inside peppubooks folder
+    try {
+      file = await gapi.client.drive.files.create({
+        resource: fileMetadata,
+        fields: 'id',
+      });
+      fileId = file.result.id;
+      // Write fileId into template store
+    } catch (err) {
+      console.log(err);
+      return;
+    }
   }
        
   return (
@@ -118,7 +139,7 @@ const Dashboard = () => {
           </div>
           <div>
           <p className='ficon'>Workflows</p>
-          <p> <MdCreateNewFolder className='iicons'/>{createWorkflow}</p>
+          <p onClick={() => createWorkflow('hanny')}> <MdCreateNewFolder className='iicons'/></p>
           </div>
         </main>
       </main>
