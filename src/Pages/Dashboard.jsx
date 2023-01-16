@@ -118,6 +118,7 @@ const Dashboard = ({filename}) => {
       const filename = window.prompt("Enter File Name");
 
       createWorkflow(filename);
+      // There'll be an alert to show file created successfully
     }
   };
 
