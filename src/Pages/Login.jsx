@@ -23,6 +23,8 @@ const Login = () => {
                 },
             })
                 .then(value => value.json())
+                // create function that searches drive to make sure peppubooks folder exist. Else, redirect to register.
+                .then()
                 .then(text => navigate('/', { state: { username: text.name, userimg: text.picture } }))
             // Add spinner here
         }

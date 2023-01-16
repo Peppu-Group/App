@@ -24,6 +24,8 @@ const Getstarted = () => {
         },
       })
         .then(value => value.json())
+        // create function that searches drive to make sure peppubooks folder doesn't exist. Else, redirect to login.
+        .then()
         .then(createFolder())
         .then(text => navigate('/', { state:{username:text.name, userimg:text.picture}}))
         // Add spinner here
