@@ -6,7 +6,7 @@ import {FcFolder} from 'react-icons/fc';
 import {FcOpenedFolder} from 'react-icons/fc';
 import {MdCreateNewFolder} from 'react-icons/md';
 
-const Dashboard = () => {
+const Dashboard = ({filename}) => {
   const [files, setFiles] = useState([]);
   const [cookies, setCookie] = useCookies(["file"]);
 
@@ -89,7 +89,6 @@ const Dashboard = () => {
 
   const displayFiles = renderFiles(files);
 
-  // We will take the user's file name here.
   async function createWorkflow(name){
     let file;
     let fileId;
@@ -139,7 +138,7 @@ const Dashboard = () => {
           </div>
           <div>
           <p className='ficon'>Workflows</p>
-          <p onClick={() => createWorkflow('hanny')}> <MdCreateNewFolder className='iicons'/></p>
+          <p onClick={() => createWorkflow(filename)}> <MdCreateNewFolder className='iicons'/></p>
           </div>
         </main>
       </main>
