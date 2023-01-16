@@ -9,7 +9,7 @@ function App() {
       <Router>
       <Routes>
           <Route path="/" element={<Dashboard/>} />
-          <Route exact path="/login" element={<Getstarted/>} />
+          <Route exact path="/register" element={<Getstarted/>} />
       </Routes>
       </Router>
     </div>
