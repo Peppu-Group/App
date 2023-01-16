@@ -6,7 +6,7 @@ import {FcFolder} from 'react-icons/fc';
 import {FcOpenedFolder} from 'react-icons/fc';
 import {MdCreateNewFolder} from 'react-icons/md';
 
-const Dashboard = ({filename}) => {
+const Dashboard = () => {
   const [files, setFiles] = useState([]);
   const [cookies, setCookie] = useCookies(["file"]);
 
