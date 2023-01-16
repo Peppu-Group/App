@@ -3,6 +3,7 @@ import getstarted from '../assets/getstarted.png'
 import IMG_2437 from '../assets/IMG_2437.png'
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
+import { useCookies } from "react-cookie";
 
 const Getstarted = () => {
   const navigate = useNavigate()
@@ -35,6 +36,8 @@ const Getstarted = () => {
     gapi.client.init({
     }).then(function () {
       gapi.client.load('drive', 'v3');
+    }).then(function () {
+      gapi.client.load('sheets', 'v4');
     }).then(function (response) {
       console.log('discovery document loaded');
     }, function (reason) {
@@ -48,6 +51,8 @@ const Getstarted = () => {
     // let code = getAuthCode()
     client.requestAccessToken()
   }
+
+  const [cookies, setCookie] = useCookies(["file"]);
 
   // Function to create peppubooks folder in the user's drive.
   // This function also creates a Template Store in the peppubooks folder.
@@ -74,6 +79,7 @@ const Getstarted = () => {
       return;
     }
 
+
     // File Metadata
     var fileMetadata = {
       'name': 'Template Store',
@@ -88,6 +94,9 @@ const Getstarted = () => {
         fields: 'id',
       });
       fileId = file.result.id;
+      setCookie("file", {fileId: fileId, folderId: folderId}, {
+        path: "/"
+      });
     } catch (err) {
       console.log(err);
       return;
