@@ -2,6 +2,8 @@ import Sidebar from '../Components/Sidebar';
 import { FaSearch } from 'react-icons/fa';
 import React, { useEffect, useState } from 'react';
 import { useCookies } from "react-cookie";
+import {FcFolder} from 'react-icons/fc';
+import {FcOpenedFolder} from 'react-icons/fc';
 
 const Dashboard = () => {
   const [files, setFiles] = useState([]);
@@ -57,12 +59,34 @@ const Dashboard = () => {
     fetchFiles();
   }, [gapi]);
 
-  const displayFiles =
-    files && files.length > 0
-      ? files.filter(function (file) {
-        return file.name !== "Template Store";
-      }).map((file) => <div>File Name: {file.name}</div>)
-      : 'No files found.';
+
+  const renderFiles = () => {
+    if (files && files.length > 0) {
+      const filteredFiles = files.filter(
+        (file) => file.name !== 'Template Store'
+      );
+      if (filteredFiles.length == 0) {
+        return (
+          <div>
+            <FcOpenedFolder className='iicon'/> Template store found.
+          </div>
+        );
+      }
+      return filteredFiles.map((file) => (
+        <div>
+          <FcFolder className='iicons'/> File Name: {file.name}
+        </div>
+      ));
+    } else {
+      return (
+        <div>
+          <FcOpenedFolder className='iicons'/> No files found.
+        </div>
+      );
+    }
+  };
+
+  const displayFiles = renderFiles(files);
        
   return (
     <body id="dash-board">
@@ -83,8 +107,10 @@ const Dashboard = () => {
             ex dolor, soluta eos modi! Temporibus enim velit officiis! Quam
             autem odit quas harum vero fugiat tempora explicabo necessitatibus?
           </p>
-
+          <div>
+          <p className='ficon'>Folders</p>
           <p>{displayFiles} </p>
+          </div>
         </main>
       </main>
     </body>

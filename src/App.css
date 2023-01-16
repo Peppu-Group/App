@@ -158,6 +158,16 @@ li {
   font-weight: 50;
 }
 
+.iicons{
+  font-size: 5em;
+  margin-right: 10%;
+}
+
+.ficon{
+  font-size: large;
+  font-weight: bold;
+}
+
 /**DashBoard Style ends Here**/
 /* Get started Page style starts here*/
 .container{
