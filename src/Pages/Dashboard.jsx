@@ -92,18 +92,15 @@ const Dashboard = () => {
   async function createWorkflow(name) {
     let file;
     let fileId;
-    // File Metadata
-    var fileMetadata = {
-      name: name,
-      mimeType: "application/vnd.google-apps.spreadsheet",
-      parents: [cookies.file.folderId],
-    };
+
+    // Filebody
+    var body = {name: name, parents: [cookies.file.folderId]};
 
     // Method to create file inside peppubooks folder
     try {
-      file = await gapi.client.drive.files.create({
-        resource: fileMetadata,
-        fields: "id",
+      file = await gapi.client.drive.files.copy({
+        'fileId': "1S4GMiZ0H0_6OHH7DEnjZt07-6kk0eMP4YSNUmRcKZXA",
+        'resource': body
       });
       fileId = file.result.id;
       // Write fileId into template store
