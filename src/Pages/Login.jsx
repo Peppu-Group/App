@@ -43,9 +43,7 @@ const Login = () => {
       response = await gapi.client.drive.files.list({
         q: "name='peppubooks'",
       });
-      console.log(response.result.files);
       if (response.result.files == 0) {
-        
         navigate("/register");
         toast.error('You have not registered your account. Redirecting to register')
         // Add a modal that you're redirecting to register
@@ -56,7 +54,7 @@ const Login = () => {
       }
       // Add a guard to filter out Template Store
     } catch (err) {
-      console.log(err);
+      toast.error(err)
     }
   }
 

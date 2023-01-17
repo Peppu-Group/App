@@ -4,6 +4,8 @@ import IMG_2437 from '../assets/IMG_2437.png'
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useCookies } from "react-cookie";
+import { toast } from 'react-toastify';
+
 
 const Getstarted = () => {
   const navigate = useNavigate()
@@ -111,6 +113,7 @@ const Getstarted = () => {
         navigate('/', { state: { username: text.name, userimg: text.picture } })
       } else {
         navigate('/login')
+        toast.error('You already have an account registered with Peppubooks. Redirecting to login')
       }
     } catch (err) {
       console.log(err);

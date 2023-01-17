@@ -6,7 +6,7 @@ import { FcFolder } from 'react-icons/fc';
 import { FcOpenedFolder } from 'react-icons/fc';
 import { MdCreateNewFolder } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom'
-
+import { toast } from 'react-toastify';
 
 const Dashboard = () => {
   const [files, setFiles] = useState([]);
@@ -105,6 +105,7 @@ const Dashboard = () => {
         'resource': body
       });
       fileId = file.result.id;
+      toast.success(`Created ${file.result.name} successfully`)
       // Write fileId into template store
     } catch (err) {
       return navigate('/login');
