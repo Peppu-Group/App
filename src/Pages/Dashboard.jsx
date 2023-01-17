@@ -5,10 +5,13 @@ import { useCookies } from "react-cookie";
 import { FcFolder } from 'react-icons/fc';
 import { FcOpenedFolder } from 'react-icons/fc';
 import { MdCreateNewFolder } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom'
+
 
 const Dashboard = () => {
   const [files, setFiles] = useState([]);
   const [cookies, setCookie] = useCookies(["file"]);
+  const navigate = useNavigate()
 
   gapi.load('client', gapiStart);
 
@@ -46,8 +49,7 @@ const Dashboard = () => {
 
       // Add a guard to filter out Template Store
     } catch (err) {
-      console.log(err);
-      return;
+      return navigate('/login');
     }
   }
 
@@ -105,8 +107,7 @@ const Dashboard = () => {
       fileId = file.result.id;
       // Write fileId into template store
     } catch (err) {
-      console.log(err);
-      return;
+      return navigate('/login');
     }
 
     // FileResource
@@ -129,8 +130,7 @@ const Dashboard = () => {
         }
       })
     } catch (err) {
-      console.log(err);
-      return;
+      return navigate('/login');
     }
   }
 

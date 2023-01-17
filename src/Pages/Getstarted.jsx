@@ -24,9 +24,9 @@ const Getstarted = () => {
         },
       })
         .then(value => value.json())
-        .then(createFolder())
-        .then(text => navigate('/', { state:{username:text.name, userimg:text.picture}}))
-        // Add spinner here
+        // create function that searches drive to make sure peppubooks folder doesn't exist. Else, redirect to login.
+        .then(text => createFolder(text))
+      // Add spinner here
     }
   })
 
@@ -56,47 +56,62 @@ const Getstarted = () => {
 
   // Function to create peppubooks folder in the user's drive.
   // This function also creates a Template Store in the peppubooks folder.
-  async function createFolder() {
-    // Declare file, folder, folderId,fileId
-    let file;
-    let folder;
-    let folderId;
-    let fileId;
-    // Folder Metadata
-    var folderMetadata = {
-      'name': 'Peppubooks',
-      'mimeType': 'application/vnd.google-apps.folder'
-    };
-    // Method to create folder
+  async function createFolder(text) {
+    let response;
     try {
-      folder = await gapi.client.drive.files.create({
-        resource: folderMetadata,
-        fields: 'id',
+      response = await gapi.client.drive.files.list({
+        q: 'name=\'peppubooks\'',
       });
-      folderId = folder.result.id;
-    } catch (err) {
-      console.log(err);
-      return;
-    }
+
+      if (response.result.files == 0) {
+        // Declare file, folder, folderId,fileId
+        let file;
+        let folder;
+        let folderId;
+        let fileId;
+        // Folder Metadata
+        var folderMetadata = {
+          'name': 'Peppubooks',
+          'mimeType': 'application/vnd.google-apps.folder'
+        };
+        // Method to create folder
+        try {
+          folder = await gapi.client.drive.files.create({
+            resource: folderMetadata,
+            fields: 'id',
+          });
+          folderId = folder.result.id;
+        } catch (err) {
+          console.log(err);
+          return;
+        }
 
 
-    // File Metadata
-    var fileMetadata = {
-      'name': 'Template Store',
-      'mimeType': 'application/vnd.google-apps.spreadsheet',
-      'parents': [folderId],
-    };
+        // File Metadata
+        var fileMetadata = {
+          'name': 'Template Store',
+          'mimeType': 'application/vnd.google-apps.spreadsheet',
+          'parents': [folderId],
+        };
 
-    // Method to create file inside peppubooks folder
-    try {
-      file = await gapi.client.drive.files.create({
-        resource: fileMetadata,
-        fields: 'id',
-      });
-      fileId = file.result.id;
-      setCookie("file", {fileId: fileId, folderId: folderId}, {
-        path: "/"
-      });
+        // Method to create file inside peppubooks folder
+        try {
+          file = await gapi.client.drive.files.create({
+            resource: fileMetadata,
+            fields: 'id',
+          });
+          fileId = file.result.id;
+          setCookie("file", { fileId: fileId, folderId: folderId }, {
+            path: "/"
+          });
+        } catch (err) {
+          console.log(err);
+          return;
+        }
+        navigate('/', { state: { username: text.name, userimg: text.picture } })
+      } else {
+        navigate('/login')
+      }
     } catch (err) {
       console.log(err);
       return;
