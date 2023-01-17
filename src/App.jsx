@@ -3,6 +3,8 @@ import './App.css'
 import Dashboard from './Pages/Dashboard'
 import Getstarted from './Pages/Getstarted'
 import Login from './Pages/Login'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
           <Route exact path="/register" element={<Getstarted/>} />
           <Route exact path="/Login" element={<Login/>} />
       </Routes>
+      <ToastContainer />
       </Router>
     </div>
   )
