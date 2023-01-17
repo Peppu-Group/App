@@ -24,11 +24,29 @@ const Login = () => {
             })
                 .then(value => value.json())
                 // create function that searches drive to make sure peppubooks folder exist. Else, redirect to register.
-                .then()
-                .then(text => navigate('/', { state: { username: text.name, userimg: text.picture } }))
+                .then(text => checkFolder(text))
             // Add spinner here
         }
     })
+
+    async function checkFolder(text) {
+        let response;
+        try {
+            response = await gapi.client.drive.files.list({
+                q: 'name=\'peppubooks\'',
+            });
+            console.log(response.result.files)
+            if (response.result.files == 0) {
+                // Add a modal that you're redirecting to register
+                navigate('/register')
+            } else {
+                navigate('/', { state: { username: text.name, userimg: text.picture } })
+            }
+            // Add a guard to filter out Template Store
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     // Function to load the gapi client.
     // Gapi is the Google API client library, to load libraries and make requests.
