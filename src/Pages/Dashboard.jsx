@@ -94,16 +94,17 @@ const Dashboard = () => {
   async function createWorkflow(name) {
     let file;
     let fileId;
+    let response;
 
     // Filebody
     var body = { name: name, parents: [cookies.file.folderId] };
     // Check that filename doesn't already exist in folder before creating
     try {
       response = await gapi.client.drive.files.list({
-        q: `name=\`${name}\'`,
+        q: `name=\'${name}\'`
       });
       if (response.result.files != 0) {
-        throw new Error('An error occurred');
+        toast.error('You already have a file with this name present, try a different name');
       } else {
         // Method to create file inside peppubooks folder
         try {
@@ -142,7 +143,7 @@ const Dashboard = () => {
         }
       }
     } catch (err) {
-      toast.error('You already have a file with this name present, try a different name');
+      return toast.error(err);
     }
   }
 
