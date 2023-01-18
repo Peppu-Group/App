@@ -67,7 +67,7 @@ const Getstarted = () => {
           q: 'name=\'peppubooks\'',
         }),
         {
-          success: 'Preparing Dashboard 👌',
+          pending: 'Signup...',
         }
       )
 
@@ -117,6 +117,8 @@ const Getstarted = () => {
           return;
         }
         navigate('/', { state: { username: text.name, userimg: text.picture } })
+        toast.success('Siginup Successful! Preparing Dashboard 👌')
+
       } else {
         navigate('/login')
         toast.error('You already have an account registered with Peppubooks. Redirecting to login')

@@ -21,7 +21,7 @@ const Login = () => {
       // run fetch request to get user info
       let value = fetch(
         "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=" +
-          response.access_token,
+        response.access_token,
         {
           method: "GET",
           headers: {
@@ -40,9 +40,14 @@ const Login = () => {
   async function checkFolder(text) {
     let response;
     try {
-      response = await gapi.client.drive.files.list({
-        q: "name='peppubooks'",
-      });
+      response = await toast.promise(
+        gapi.client.drive.files.list({
+          q: "name='peppubooks'",
+        }),
+        {
+          pending: 'Signing in...',
+        }
+      )
       if (response.result.files == 0) {
         navigate("/register");
         toast.error('You have not registered your account. Redirecting to register')
@@ -51,6 +56,7 @@ const Login = () => {
         navigate("/", {
           state: { username: text.name, userimg: text.picture },
         });
+        toast.success('Sign-in Successful! Preparing Dashboard 👌')
       }
       // Add a guard to filter out Template Store
     } catch (err) {
@@ -87,44 +93,44 @@ const Login = () => {
   }
 
   return (
-   
-      <main className="container">
-        {/* The big image in the get started page* */}
-        <figure className="container-image">
-          <img src={getstarted} width={600} />
+
+    <main className="container">
+      {/* The big image in the get started page* */}
+      <figure className="container-image">
+        <img src={getstarted} width={600} />
+      </figure>
+      {/** The write ups in the right conner */}
+      <section className="container-text">
+        <figure>
+          <img src={IMG_2437} />
         </figure>
-        {/** The write ups in the right conner */}
-        <section className="container-text">
-          <figure>
-            <img src={IMG_2437} />
+        <article className="container-paragraph">
+          <p>
+            Let's make your <br /> life simple with our <br /> seamless book
+            keeping
+          </p>
+        </article>
+
+        <article className="getstarted-with-google">
+          <a href="#">
+            Get started <span className="g-in-google">G</span>
+            <span className="o-in-google">o</span>
+            <span className="onext-in-google">o</span>
+            <span className="g-in-google">g</span>
+            <span className="l-in-google">l</span>
+            <span className="e-in-google">e</span>
+          </a>
+        </article>
+
+        <article className="works">
+          <p onClick={getAuthCode}>See how Peppu works </p>
+          <figure className="icon">
+            <AiOutlineArrowRight />
           </figure>
-          <article className="container-paragraph">
-            <p>
-              Let's make your <br /> life simple with our <br /> seamless book
-              keeping
-            </p>
-          </article>
+        </article>
+      </section>
+    </main>
 
-          <article className="getstarted-with-google">
-            <a href="#">
-              Get started <span className="g-in-google">G</span>
-              <span className="o-in-google">o</span>
-              <span className="onext-in-google">o</span>
-              <span className="g-in-google">g</span>
-              <span className="l-in-google">l</span>
-              <span className="e-in-google">e</span>
-            </a>
-          </article>
-
-          <article className="works">
-            <p onClick={getAuthCode}>See how Peppu works </p>
-            <figure className="icon">
-              <AiOutlineArrowRight />
-            </figure>
-          </article>
-        </section>
-      </main>
- 
   );
 };
 
