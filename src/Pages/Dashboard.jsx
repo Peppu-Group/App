@@ -97,41 +97,52 @@ const Dashboard = () => {
 
     // Filebody
     var body = { name: name, parents: [cookies.file.folderId] };
-
-    // Method to create file inside peppubooks folder
+    // Check that filename doesn't already exist in folder before creating
     try {
-      file = await gapi.client.drive.files.copy({
-        'fileId': "1S4GMiZ0H0_6OHH7DEnjZt07-6kk0eMP4YSNUmRcKZXA",
-        'resource': body
+      response = await gapi.client.drive.files.list({
+        q: `name=\`${name}\'`,
       });
-      fileId = file.result.id;
-      toast.success(`Created ${file.result.name} successfully`)
-      // Write fileId into template store
-    } catch (err) {
-      return navigate('/login');
-    }
+      if (response.result.files != 0) {
+        throw new Error('An error occurred');
+      } else {
+        // Method to create file inside peppubooks folder
+        try {
+          file = await gapi.client.drive.files.copy({
+            'fileId': "1S4GMiZ0H0_6OHH7DEnjZt07-6kk0eMP4YSNUmRcKZXA",
+            'resource': body
+          });
+          fileId = file.result.id;
+          toast.success(`Created ${file.result.name} successfully`)
+          // Write fileId into template store
+        } catch (err) {
+          return navigate('/login');
+        }
 
-    // FileResource
-    try {
-      // copy fileId into template store
-      let update = await gapi.client.sheets.spreadsheets.values.append({
-        spreadsheetId: cookies.file.fileId,
-        range: 'A:B',
-        valueInputOption: 'RAW',
-        insertDataOption: 'INSERT_ROWS',
-        'resource': {
-          "range": "A:B",
-            "majorDimension": "ROWS",
-            "values": [
+        // FileResource
+        try {
+          // copy fileId into template store
+          let update = await gapi.client.sheets.spreadsheets.values.append({
+            spreadsheetId: cookies.file.fileId,
+            range: 'A:B',
+            valueInputOption: 'RAW',
+            insertDataOption: 'INSERT_ROWS',
+            'resource': {
+              "range": "A:B",
+              "majorDimension": "ROWS",
+              "values": [
                 [
                   name,
                   fileId
                 ]
-            ],
+              ],
+            }
+          })
+        } catch (err) {
+          return navigate('/login');
         }
-      })
+      }
     } catch (err) {
-      return navigate('/login');
+      toast.error('You already have a file with this name present, try a different name');
     }
   }
 
