@@ -61,9 +61,15 @@ const Getstarted = () => {
   async function createFolder(text) {
     let response;
     try {
-      response = await gapi.client.drive.files.list({
-        q: 'name=\'peppubooks\'',
-      });
+      response = await toast.promise(
+
+        gapi.client.drive.files.list({
+          q: 'name=\'peppubooks\'',
+        }),
+        {
+          success: 'Preparing Dashboard 👌',
+        }
+      )
 
       if (response.result.files == 0) {
         // Declare file, folder, folderId,fileId
