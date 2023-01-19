@@ -18,19 +18,17 @@ const Dashboard = () => {
   // Function to load the gapi client.
   // Gapi is the Google API client library, to load libraries and make requests.
   function gapiStart() {
-    gapi.client
-      .init({})
-      .then(function () {
-        gapi.client.load('drive', 'v3');
-      })
-      .then(
-        function (response) {
-          console.log('discovery document loaded');
-        },
-        function (reason) {
-          console.log('Error: ' + reason.result.error.message);
-        }
-      );
+    gapi.client.init({
+    })
+    .then(function () {
+      gapi.client.load('script', 'v1');
+    }).then(function () {
+      gapi.client.load('drive', 'v3');
+    }).then(function (response) {
+      console.log('discovery document loaded');
+    }, function (reason) {
+      console.log('Error: ' + reason.result.error.message);
+    });
   }
 
   // This function should list files in the peppubooks folder.
@@ -48,6 +46,53 @@ const Dashboard = () => {
       return response.result.files;
 
       // Add a guard to filter out Template Store
+    } catch (err) {
+      return navigate('/login');
+    }
+  }
+
+  async function createTransaction(name) {
+    console.log("mee")
+    // Search for fileId in Template store,
+    let url = `https://docs.google.com/spreadsheets/d/${cookies.file.fileId}/edit`;
+    let id;
+    try {
+      id = await gapi.client.script.scripts.run({
+        'scriptId': 'AKfycbzkB3j5U6pn_n9n2DN3OTLyjRA5owEN2C-u_sZyICYNCXwTs7DbTu0KIjTke2zQR5OE8g',
+        'resource': {
+          'function': 'return_row',
+          "parameters": [
+            url,
+            name,
+        ],
+        },
+      })
+    } catch (err) {
+      return toast.error(err);
+    }
+    // Write value into transaction file
+
+    try {
+      let update = await gapi.client.sheets.spreadsheets.values.append({
+        spreadsheetId: id.result.response.result,
+        range: 'Transactions!A:E',
+        valueInputOption: 'RAW',
+        insertDataOption: 'INSERT_ROWS',
+        'resource': {
+          "range": "Transactions!A:E",
+          "majorDimension": "ROWS",
+          "values": [
+            [
+            '2023-01-01',
+            '1',
+            'description',
+              '500',
+              'Sales',
+              'Bank'
+            ]
+          ],
+        }
+      })
     } catch (err) {
       return navigate('/login');
     }
@@ -77,7 +122,7 @@ const Dashboard = () => {
       }
       return filteredFiles.map((file) => (
         <div>
-          <FcFolder className='iicons' /> File Name: {file.name}
+          <FcFolder onClick={() => createTransaction(file.name)} className='iicons'/> File Name: {file.name}
         </div>
       ));
     } else {
