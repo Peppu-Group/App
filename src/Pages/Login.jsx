@@ -4,10 +4,12 @@ import IMG_2437 from "../assets/IMG_2437.png";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { useCookies } from "react-cookie";
 
 const Login = () => {
   const navigate = useNavigate();
   gapi.load("client", gapiStart);
+  const [cookies, setCookie] = useCookies(["file"]);
   let client = google.accounts.oauth2.initTokenClient({
     client_id:
       "810913561449-r80nc33r20qe18ij2bcll7i6sv4r8bkg.apps.googleusercontent.com",
@@ -39,6 +41,48 @@ const Login = () => {
 
   async function checkFolder(text) {
     let response;
+   
+    // check cookies, make sure that folderId and fileId are registerd. If not, get the id by username and store it in cookies.
+      // This could be a problem if the user switches to a new computer.
+      if (cookies.file == undefined ) {
+        let foldername = 'Peppubooks'
+        let filename = 'Template Store'
+        let folderid;
+        let fileid;
+        try {
+          folderid = await gapi.client.script.scripts.run({
+            // remember to create a .env file to add sensitive information
+            'scriptId': 'AKfycbzkB3j5U6pn_n9n2DN3OTLyjRA5owEN2C-u_sZyICYNCXwTs7DbTu0KIjTke2zQR5OE8g',
+            'resource': {
+              'function': 'get_folder_id',
+              "parameters": [
+                foldername,
+            ],
+            },
+          })
+          // store folderid as `folderid.result.response.result`
+        } catch (err) {
+          return toast.error(err);
+        }
+
+        try {
+          fileid = await gapi.client.script.scripts.run({
+            'scriptId': 'AKfycbzkB3j5U6pn_n9n2DN3OTLyjRA5owEN2C-u_sZyICYNCXwTs7DbTu0KIjTke2zQR5OE8g',
+            'resource': {
+              'function': 'get_id',
+              "parameters": [
+                filename,
+            ],
+            },
+          })
+        } catch (err) {
+          return toast.error(err);
+        }
+        setCookie("file", { fileId: fileid.result.response.result, folderId: folderid.result.response.result}, {
+          path: "/"
+        })
+      }
+
     try {
       response = await toast.promise(
         gapi.client.drive.files.list({
@@ -58,7 +102,6 @@ const Login = () => {
         });
         toast.success('Sign-in Successful! Preparing Dashboard 👌')
       }
-      // Add a guard to filter out Template Store
     } catch (err) {
       toast.error(err)
     }
@@ -74,6 +117,9 @@ const Login = () => {
       })
       .then(function () {
         gapi.client.load("sheets", "v4");
+      })
+      .then(function () {
+        gapi.client.load('script', 'v1');
       })
       .then(
         function (response) {
