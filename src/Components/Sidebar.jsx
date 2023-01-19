@@ -20,9 +20,9 @@ const Sidebar = () => {
    }, [UserImage])
 
     return (
-        <main>
+        <main className='home-sidebar'>
             {/*Home page Nave-bar components style={{width: 74, height: 30, marginTop: 13}} */}
-            <section className='home-sidebar'>
+            <section >
                 <article className='sidenav'>
                     <a href='https://peppubooks.com'><img src={IMG_2437} className='side-img' /></a>
                  <section className='user-info'>
