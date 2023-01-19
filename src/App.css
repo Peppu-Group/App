@@ -151,6 +151,12 @@ top: 0;
 /**DashBoard Style ends Here**/
 
 
+/*******LOGIN PAGE*************************/
+
+.login{
+  background-color: #34a853;
+}
+/****************************************/
 /* Get started Page style starts here*/
 .container{
   margin-block: -1%;
