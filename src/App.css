@@ -151,9 +151,43 @@ top: 0;
 /**DashBoard Style ends Here**/
 
 
-/*******LOGIN PAGE*************************/
+/*******SIGN-IN PAGE*************************/
 
+#signin{
+  background-color: #ffffff;
+  background-image: linear-gradient(to top right, #ffffff, #b5cabb, #ffffff, #f0f0e0, #f0ebd8),
+      linear-gradient(to left, #ffffff, #ffffff);
+      max-width: 100%;
+    height: 100vh;
+    padding-left: 10%;
+}
+#signin main{
+  background-color: #a2d1af;
+position: relative;
+top: 10%;
+border-radius: 10px;
+
+  
+}
+#signin header{
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+top: 12%;
+ 
+}
+#signin header img{
+  width: 10%;
+}
+.start{
+  text-align: center;
+}
 .login{
+  text-align: center;
+}
+.login button{
+  width: 95%;
+  border-radius: 10px;
   background-color: #34a853;
 }
 /****************************************/
