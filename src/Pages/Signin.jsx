@@ -22,7 +22,6 @@ const Signin = () =>{
     <button type="summit">Login</button>
     <br />
     <p><span>----------</span>or<span>-----------</span></p>
-    <br />
     <a href='#'><span className='g-in-google'>G</span ><span className='o-in-google'>
     o</span><span className='onext-in-google'>o</span><span className='g-in-google'>g</span><span className='l-in-google'>l
     </span ><span className='e-in-google'>e</span></a>
