@@ -120,7 +120,7 @@ const Getstarted = () => {
         toast.success('Siginup Successful! Preparing Dashboard 👌')
 
       } else {
-        navigate('/login')
+        navigate('/sign-in')
         toast.error('You already have an account registered with Peppubooks. Redirecting to login')
       }
     } catch (err) {
