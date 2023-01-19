@@ -196,6 +196,10 @@ const Dashboard = () => {
     if (window.prompt) {
       const filename = window.prompt("Enter File Name");
 
+      if (filename.length < 1) {
+        throw(toast.error(`couldn't create file with no name`))
+      }
+
       createWorkflow(filename);
       // There'll be an alert to show file created successfully
     }
