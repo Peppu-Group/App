@@ -20,15 +20,15 @@ const Dashboard = () => {
   function gapiStart() {
     gapi.client.init({
     })
-    .then(function () {
-      gapi.client.load('script', 'v1');
-    }).then(function () {
-      gapi.client.load('drive', 'v3');
-    }).then(function (response) {
-      console.log('discovery document loaded');
-    }, function (reason) {
-      console.log('Error: ' + reason.result.error.message);
-    });
+      .then(function () {
+        gapi.client.load('script', 'v1');
+      }).then(function () {
+        gapi.client.load('drive', 'v3');
+      }).then(function (response) {
+        console.log('discovery document loaded');
+      }, function (reason) {
+        console.log('Error: ' + reason.result.error.message);
+      });
   }
 
   // This function should list files in the peppubooks folder.
@@ -64,7 +64,7 @@ const Dashboard = () => {
           "parameters": [
             url,
             name,
-        ],
+          ],
         },
       })
     } catch (err) {
@@ -83,9 +83,9 @@ const Dashboard = () => {
           "majorDimension": "ROWS",
           "values": [
             [
-            '2023-01-01',
-            '1',
-            'description',
+              '2023-01-01',
+              '1',
+              'description',
               '500',
               'Sales',
               'Bank'
@@ -122,7 +122,7 @@ const Dashboard = () => {
       }
       return filteredFiles.map((file) => (
         <div>
-          <FcFolder onClick={() => createTransaction(file.name)} className='iicons'/> File Name: {file.name}
+          <FcFolder onClick={() => createTransaction(file.name)} className='iicons' /> File Name: {file.name}
         </div>
       ));
     } else {
@@ -197,7 +197,7 @@ const Dashboard = () => {
       const filename = window.prompt("Enter File Name");
 
       if (filename.length < 1) {
-        throw(toast.error(`couldn't create file with no name`))
+        throw (toast.error(`couldn't create file with no name`))
       }
 
       createWorkflow(filename);
@@ -206,24 +206,23 @@ const Dashboard = () => {
   };
 
   return (
-    <body id="dash-board">
-      <main className="dashboard-main">
-        <aside>
+
+
+    <body id='dash-board'>
+      <main className='dashboard-main'>
+
+        <aside className='aside'>
           <Sidebar />
         </aside>
 
-        <main>
-          <header className="fixed">
+        <section>
+          <header className='fixed' >
             <h2>My&nbsp;Workspace</h2>
-            <nav className="search">
-              <FaSearch />
-            </nav>
+            <nav className='search'><FaSearch /></nav>
           </header>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut iste in
-            ex dolor, soluta eos modi! Temporibus enim velit officiis! Quam
-            autem odit quas harum vero fugiat tempora explicabo necessitatibus?
-          </p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut iste in ex dolor,
+            soluta eos modi! Temporibus enim velit officiis! Quam autem odit quas harum vero fugiat
+            tempora explicabo necessitatibus?</p>
           <div>
             <p className="ficon">Folders</p>
             <p>{displayFiles} </p>
@@ -235,9 +234,12 @@ const Dashboard = () => {
               <MdCreateNewFolder className="iicons" />
             </p>
           </div>
-        </main>
+        </section>
+
       </main>
     </body>
-  );
-};
+  )
+}
+
+
 export default Dashboard;

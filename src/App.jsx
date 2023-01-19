@@ -2,9 +2,8 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import './App.css'
 import Dashboard from './Pages/Dashboard'
 import Getstarted from './Pages/Getstarted'
-import Login from './Pages/Login'
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import Signin from './Pages/Signin'
+
 
 function App() {
   return (
@@ -12,8 +11,8 @@ function App() {
       <Router>
       <Routes>
           <Route path="/" element={<Dashboard/>} />
-          <Route exact path="/register" element={<Getstarted/>} />
-          <Route exact path="/Login" element={<Login/>} />
+          <Route exact path="/login" element={<Getstarted/>} />
+          <Route  exact path="/signin" element={<Signin/>} />
       </Routes>
       <ToastContainer />
       </Router>
