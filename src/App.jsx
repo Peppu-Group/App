@@ -3,6 +3,9 @@ import './App.css'
 import Dashboard from './Pages/Dashboard'
 import Getstarted from './Pages/Getstarted'
 import Signin from './Pages/Signin'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Login from './Pages/Login'
 
 
 function App() {
@@ -11,8 +14,8 @@ function App() {
       <Router>
       <Routes>
           <Route path="/" element={<Dashboard/>} />
-          <Route exact path="/login" element={<Getstarted/>} />
-          <Route  exact path="/signin" element={<Signin/>} />
+          <Route exact path="/register" element={<Getstarted/>} />
+          <Route  exact path="/login" element={<Login/>} />
       </Routes>
       <ToastContainer />
       </Router>
