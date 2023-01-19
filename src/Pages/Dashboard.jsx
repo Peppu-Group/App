@@ -47,7 +47,7 @@ const Dashboard = () => {
 
       // Add a guard to filter out Template Store
     } catch (err) {
-      return navigate('/login');
+      return navigate('/sign-in');
     }
   }
 
@@ -94,7 +94,7 @@ const Dashboard = () => {
         }
       })
     } catch (err) {
-      return navigate('/login');
+      return navigate('/sign-in');
     }
   }
 
@@ -161,7 +161,7 @@ const Dashboard = () => {
           toast.success(`Created ${file.result.name} successfully`)
           // Write fileId into template store
         } catch (err) {
-          return navigate('/login');
+          return navigate('/sign-in');
         }
 
         // FileResource
@@ -184,7 +184,7 @@ const Dashboard = () => {
             }
           })
         } catch (err) {
-          return navigate('/login');
+          return navigate('/sign-in');
         }
       }
     } catch (err) {

@@ -1,5 +1,5 @@
 import React from "react";
-import getstarted from "../assets/getstarted.png";
+import signin from "../assets/signin.png";
 import IMG_2437 from "../assets/IMG_2437.png";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
@@ -93,7 +93,7 @@ const Login = () => {
         }
       )
       if (response.result.files == 0) {
-        navigate("/register");
+        navigate("/get-started");
         toast.error('You have not registered your account. Redirecting to register')
         // Add a modal that you're redirecting to register
       } else {
@@ -143,7 +143,7 @@ const Login = () => {
     <main className="container">
       {/* The big image in the get started page* */}
       <figure className="container-image">
-        <img src={getstarted} width={600} />
+        <img src={signin} width={600} />
       </figure>
       {/** The write ups in the right conner */}
       <section className="container-text">
@@ -152,14 +152,14 @@ const Login = () => {
         </figure>
         <article className="container-paragraph">
           <p>
-            Let's make your <br /> life simple with our <br /> seamless book
+            Let's get back to making <br /> your life simple with our <br /> seamless book
             keeping
           </p>
         </article>
 
-        <article className="getstarted-with-google">
-          <a href="#">
-            Get started <span className="g-in-google">G</span>
+        <article className="getstarted-with-google" onClick={getAuthCode}>
+          <a>
+            Sign in using <span className="g-in-google">G</span>
             <span className="o-in-google">o</span>
             <span className="onext-in-google">o</span>
             <span className="g-in-google">g</span>
@@ -168,15 +168,11 @@ const Login = () => {
           </a>
         </article>
 
-        <article className="works">
-          <p onClick={getAuthCode}>See how Peppu works </p>
-          <figure className="icon">
-            <AiOutlineArrowRight />
-          </figure>
+        <article className='works'>
+          <p>New here? <a class="glogin" href="/get-started">Get Started for free</a></p>
         </article>
       </section>
     </main>
-
   );
 };
 
