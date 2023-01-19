@@ -1,11 +1,6 @@
 # TODO
 
-lOGIN
-- create function that searches drive to make sure peppubooks folder exist. Else, redirect to register.
-- add spinner to login
+GAPI
+- Make sure gapi and google loaded before delivering page. Else show sessiontimeout or something. (Add onmount or other events)
 
-GETSTARTED
-- create function that searches drive to make sure peppubooks folder doesn't exist. Else, redirect to login.
-
-DASHBOARD
-- When accessCode expires, send user to login. Add navigate to the `gapi.client.drive.files` and `gapi.client.drive.spreadsheet` function for this.
+- remember to create a .env file to add sensitive information

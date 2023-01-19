@@ -4,6 +4,8 @@ import IMG_2437 from '../assets/IMG_2437.png'
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useCookies } from "react-cookie";
+import { toast } from 'react-toastify';
+
 
 const Getstarted = () => {
   const navigate = useNavigate()
@@ -59,9 +61,15 @@ const Getstarted = () => {
   async function createFolder(text) {
     let response;
     try {
-      response = await gapi.client.drive.files.list({
-        q: 'name=\'peppubooks\'',
-      });
+      response = await toast.promise(
+
+        gapi.client.drive.files.list({
+          q: 'name=\'peppubooks\'',
+        }),
+        {
+          pending: 'Signup...',
+        }
+      )
 
       if (response.result.files == 0) {
         // Declare file, folder, folderId,fileId
@@ -109,8 +117,11 @@ const Getstarted = () => {
           return;
         }
         navigate('/', { state: { username: text.name, userimg: text.picture } })
+        toast.success('Siginup Successful! Preparing Dashboard 👌')
+
       } else {
         navigate('/login')
+        toast.error('You already have an account registered with Peppubooks. Redirecting to login')
       }
     } catch (err) {
       console.log(err);
